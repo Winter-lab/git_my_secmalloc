@@ -8,6 +8,7 @@
 #include <sys/mman.h> // for mmap
 #include <time.h>
 #include <string.h>
+#include <strings.h>
 
 /*	----------------------- FUNCTIONS -----------------------
 	1. MALLOC
