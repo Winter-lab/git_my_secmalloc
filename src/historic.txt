@@ -1,0 +1,2 @@
+Allocated memory for the pointer
+Created a new chunk as there was no linked list yet.

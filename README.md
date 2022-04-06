@@ -1,2 +1,2 @@
 # my_secmalloc
-@Ecole2600's project to learn how to implement security & how to avoid heap overflow by re-implementing the dynamical allocation of memory's library (malloc, free, calloc, realloc) using mmap. 
+Projet en binôme de l'Ecole 2600. L'objectif est de ré-implémenter la librarie d'allocation dynamique de mémoire (malloc, free, calloc, realloc) pour traiter les notions de gestion de mémoire, de stack, et aborder les problèmes de sécurité tels que le buffer overflow, le heap overflow, etc.
