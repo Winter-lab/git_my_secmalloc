@@ -10,6 +10,8 @@
 
 #include "../include/my_secmalloc.h"
 
+void *my_calloc(size_t size_el, size_t nb_el);
+
 /*	------------------- MEMORY LEAK ------------------------
 	If we don't deallocate the dynamic memory, it'll reside in the heap section.
 	It is called memory leak. It'll reduce the system performances by reducing
@@ -186,6 +188,34 @@ void my_free(void *ptr) {
 		fprintf(f,"Free : addr = %p, desallocated length = %ld\n",temp->m_addr, temp->m_size);
 		fclose(f);
 	}
+}
+
+void *my_calloc(size_t size_el, size_t nb_el) {
+	if (call_memory_leak == 0)     // Linked through atexit
+	{
+		call_memory_leak = 1;
+		atexit(memory_leak);    // Verify a function call in order to check memory_leak through atexit by single-use call of it.
+	}
+	
+	void *addr = NULL;
+
+	if(size_el == 0) {
+		printf("size is null\n");
+		return(NULL);
+	}
+	
+    if(nb_el == 0) {
+		printf("number of elements is null\n");
+		return(NULL);
+	}
+
+    addr = my_malloc(nb_el * size_el);
+    if(addr){
+        char *byte = addr;
+        for(byte;byte<addr+size_el*nb_el;byte++){
+            &byte = 0;
+        }
+    }
 }
 
 /*	----------------------------------------------------
