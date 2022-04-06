@@ -8,6 +8,7 @@ int main() {
 	//putenv("MSM_OUTPUT=fic.txt");
 	msm_output = getenv("MSM_OUTPUT");
 	//printf("%s",msm_output);
+	// check si elle existe, mettre fichier par defaut
 	memset(addr, 0, sizeof(addr));
 	my_free(addr);
 	addr = NULL;

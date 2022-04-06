@@ -1,5 +1,15 @@
+/*	; ---------------------------
+	Auhor: HEXION @Haixion (git)
+	Last update: 06/04/2022
+	
+	@2600's project
+	Duo:	Bastos | realloc, calloc
+		Hexion | malloc, free, makefile, static & dynamic libraries
+	; ---------------------------
+*/
+
 #include "../include/my_secmalloc.h"
-// LEGENDS: SN_Sidenote
+
 /*	------------------- MEMORY LEAK ------------------------
 	If we don't deallocate the dynamic memory, it'll reside in the heap section.
 	It is called memory leak. It'll reduce the system performances by reducing
@@ -28,7 +38,6 @@
 void memory_leak() {
 	        FILE *f = fopen("memory_leak.txt","w");
 		t_chunk *temp = head;
-		// SN. pointeurs restants au moment du atexit => memory leaks
 		if(f == NULL) {
 			return;
 		}
@@ -61,7 +70,6 @@ void memory_leak() {
 		fclose(f);
 }
 
-/* See include for explanation */
 void	*my_malloc(size_t size) {
 	FILE *historic = fopen("historic.txt", "w");
 	/*	ATEXIT
@@ -117,6 +125,7 @@ void	*my_malloc(size_t size) {
 			temp = temp->m_next;
 
 		t_chunk *new = mmap(NULL, sizeof(t_chunk), PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);
+		fprintf(historic, "malloc for a new chunk");
 		new->m_addr = addr;
 		new->m_size = size;
 		//new->m_occupe = 1;
@@ -129,11 +138,11 @@ void	*my_malloc(size_t size) {
 	fclose(historic);
 }
 
-/* ------------------- DOUBLE FREE CHECK -------------------
+/*	------------------- DOUBLE FREE CHECK -------------------
 	If we free the same pointer two or more time, then the
 	behavior is undefined. So if we free the same pointer 
 	which is freed already, the program will stop its exec
-*/
+	---------------------------------------------------------	*/
 void my_free(void *ptr) {
 	int error = 0;
 	t_chunk *temp = head;
@@ -179,5 +188,7 @@ void my_free(void *ptr) {
 	}
 }
 
-/* TDL : REALLOC, CALLOC */
-
+/*	----------------------------------------------------
+				@BASTOS
+	realloc & calloc
+	----------------------------------------------------	*/
